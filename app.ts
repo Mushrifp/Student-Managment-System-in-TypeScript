@@ -1,18 +1,17 @@
 import * as express from 'express';
-import * as dotenv from 'dotenv';
 
+const app:express.Express = express();
 
-dotenv.config()
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 
-const app = express()
-
-app.use(express.json())
-app.use(express.urlencoded({extended:true}));
- 
-app.get('/',(req,res)=>{
-  res.send("welcome to the page ") 
-}) 
-
-app.listen(process.env.PORT , ()=>{
-    console.log(`server started running http://localhost:${process.env.PORT}`)
+app.get('/students',(req,res)=>{
+  res.send("hii stutendt")
 })
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+}); 
