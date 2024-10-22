@@ -1,17 +1,23 @@
 import * as express from 'express';
+import * as dotenv from 'dotenv'
+import mainRouter from './router/mainRouter'
+
+
 
 const app:express.Express = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+dotenv.config()
 
-app.get('/students',(req,res)=>{
-  res.send("hii stutendt")
-})
+app.set("view engine",'ejs')
+app.set('views','./views')
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+app.use('/', mainRouter);
 
+
+const PORT = process.env.PORT ;
+  
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 }); 
