@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.teacherController = void 0;
+exports.goToPages = exports.teacherController = void 0;
 var dbconfig_1 = require("../model/dbconfig");
 var teacherController = /** @class */ (function () {
     function teacherController() {
@@ -63,19 +63,6 @@ var teacherController = /** @class */ (function () {
                     else {
                         res.render("login", { emailError: "invalid email", data: teacherSignupData });
                     }
-                }
-                catch (error) {
-                    res.status(500).json({ message: 'Error' });
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    teacherController.prototype.goToCreateNew = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                try {
-                    res.render('create');
                 }
                 catch (error) {
                     res.status(500).json({ message: 'Error' });
@@ -122,6 +109,109 @@ var teacherController = /** @class */ (function () {
             });
         });
     };
+    teacherController.prototype.editStudents = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var stdID, query, dataOfStudent, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        stdID = Number(req.query.id);
+                        query = "SELECT * FROM students WHERE id = '".concat(stdID, "'");
+                        return [4 /*yield*/, dbconfig_1.default.query(query)];
+                    case 1:
+                        dataOfStudent = _a.sent();
+                        res.render("editStd", { data: dataOfStudent.rows });
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _a.sent();
+                        console.error("this is the DB er", error_2);
+                        res.status(500).json({ message: 'Error' });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    teacherController.prototype.saveChanges = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var studentsData, emailCheck, updateQuery, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 5, , 6]);
+                        studentsData = {
+                            name: req.body.name,
+                            email: req.body.email,
+                            password: req.body.password,
+                            rollno: req.body.rollno,
+                            course: req.body.course
+                        };
+                        return [4 /*yield*/, dbconfig_1.default.query("SELECT * FROM students WHERE email = $1", [studentsData.email])];
+                    case 1:
+                        emailCheck = _a.sent();
+                        if (!(emailCheck.rows.length > 0 && emailCheck.rows[0].email !== studentsData.email)) return [3 /*break*/, 2];
+                        res.render('editStd', { message: "Email already exists", data: [studentsData] });
+                        return [3 /*break*/, 4];
+                    case 2:
+                        updateQuery = "UPDATE students SET name = $1, email = $2, password = $3, rollno = $4, course = $5 WHERE id = $6";
+                        return [4 /*yield*/, dbconfig_1.default.query(updateQuery, [studentsData.name, studentsData.email, studentsData.password, studentsData.rollno, studentsData.course, req.body.id])];
+                    case 3:
+                        _a.sent();
+                        res.render('editStd', { message: "Updated", data: [studentsData] });
+                        _a.label = 4;
+                    case 4: return [3 /*break*/, 6];
+                    case 5:
+                        error_3 = _a.sent();
+                        console.log("errrrr", error_3);
+                        res.status(500).json({ message: 'Error' });
+                        return [3 /*break*/, 6];
+                    case 6: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return teacherController;
 }());
 exports.teacherController = teacherController;
+//----------------------------------------------------
+var goToPages = /** @class */ (function () {
+    function goToPages() {
+    }
+    goToPages.prototype.goToCreateNew = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                try {
+                    res.render('create');
+                }
+                catch (error) {
+                    res.status(500).json({ message: 'Error' });
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    goToPages.prototype.loadDash = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var dataOfStudents, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, dbconfig_1.default.query('SELECT * FROM students')];
+                    case 1:
+                        dataOfStudents = _a.sent();
+                        res.render('dash', { students: dataOfStudents.rows });
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_4 = _a.sent();
+                        res.status(500).json({ message: 'Error' });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return goToPages;
+}());
+exports.goToPages = goToPages;

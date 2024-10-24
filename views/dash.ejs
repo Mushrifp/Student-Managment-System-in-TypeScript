@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher/Admin Dashboard</title>
+    <title>Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -128,34 +128,40 @@
         <table>
             <thead>
                 <tr>
-                    <th>Student ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Grade</th>
+                    <th>Course</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>101</td>
-                    <td>John Doe</td>
-                    <td>johndoe@example.com</td>
-                    <td>Grade 10</td>
-                    <td>
-                        <button class="view-btn" onclick="viewDetails(101)">View</button>
-                        <button class="delete-btn" onclick="deleteDetails(101)">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>102</td>
-                    <td>Jane Smith</td>
-                    <td>janesmith@example.com</td>
-                    <td>Grade 11</td>
-                    <td>
-                        <button class="view-btn" onclick="viewDetails(102)">View</button>
-                        <button class="delete-btn" onclick="deleteDetails(102)">Delete</button>
-                    </td>
-                </tr>
+                <% if (students && students.length > 0) { %>
+                    <% students.forEach(student => { %>
+                        <tr>
+                            <td><%= student.name %></td>
+                            <td><%= student.email %></td>
+                            <td><%= student.rollno %></td>
+                            <td><%= student.course %></td>
+                            <td>
+                                <button class="view-btn" >
+                                    <a  href="/editStd?id=<%= student.id %>" 
+                                        style=" color: white; text-decoration: none;">
+                                        View
+                                     </a>
+                                </button>
+                                <button class="delete-btn" ><a href="/deleteStd?id=<%= student.id %>" 
+                                    style=" color: white; text-decoration: none;">
+                                    Delete
+                                 </a></button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5">No students found.</td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
     </div>

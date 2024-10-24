@@ -95,47 +95,47 @@
 <body>
     
     <div class="container">
-        <h1>Create a new Student</h1>
-
-        <button class="view-btn" style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 5px;">
+        <h1>Edit Student</h1>
+        
+         <button class="view-btn" style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 5px;">
             <a href="/dashboard" style="color: white; text-decoration: none;">
                 Go back
             </a>
         </button>
         
-
         <% if (typeof message !== 'undefined') { %>
-            <span style="color: rgb(255, 0, 0); font-size: x-large; margin-left: 30%;" >Email already exist</span>
+            <span style="color: rgb(255, 0, 0); font-size: x-large; margin-left: 30%;" ><%= message %></span>
         <% } %>
-
         
-        
-        <form id="createForm" method="post" action="/createNewStd">
+        <form id="createForm" method="post" action="/saveChanges">
             <label for="name">Name</label>
-            <input name="name" type="text" id="name" placeholder="Enter Name" value="<%= typeof data !== 'undefined' ? data.name : '' %>" required>
+            <input name="name" type="text" id="name" placeholder="Enter Name" value="<%= data[0].name%>" required>
 
             <label for="email">Email</label>
-            <input name="email" type="email" id="email" placeholder="Enter Email" value="<%= typeof data !== 'undefined' ? data.email : '' %>" required>
+            <input name="email" type="email" id="email" placeholder="Enter Email" value="<%= data[0].email  %>" required>
 
             <label for="password">Password</label>
-            <input name="password" type="Password" id="Password" placeholder="Enter Password" value="<%= typeof data !== 'undefined' ? data.password : '' %>" required>
+            <input name="password" type="Password" id="Password" placeholder="Enter Password" value="<%= data[0].password %>" required>
 
             <label for="rollNo">Roll No</label>
-            <input name="rollno" type="number" id="rollNo" placeholder="Enter Roll No" value="<%= typeof data !== 'undefined' ? data.rollno : '' %>" required>
+            <input name="rollno" type="number" id="rollNo" placeholder="Enter Roll No" value="<%= data[0].rollno  %>" required>
+
+            <input type="hidden" name="id" value="<%= data[0].id%>">
 
             <label for="course">Course</label>
             <select name="course" id="course" required>
                 <option value="" disabled>Select Course</option>
-                <option value="Language" <%= typeof data !== 'undefined' && data.course === 'Language' ? 'selected' : '' %>>Language</option>
-                <option value="Arts" <%= typeof data !== 'undefined' && data.course === 'Arts' ? 'selected' : '' %>>Arts</option>
-                <option value="Sports" <%= typeof data !== 'undefined' && data.course === 'Sports' ? 'selected' : '' %>>Sports</option>
-                <option value="Computer" <%= typeof data !== 'undefined' && data.course === 'Computer' ? 'selected' : '' %>>Computer</option>
+                <option value="Language" <%=  data[0].course === 'Language' ? 'selected' : '' %>>Language</option>
+                <option value="Arts" <%=  data[0].course === 'Arts' ? 'selected' : '' %>>Arts</option>
+                <option value="Sports" <%=  data[0].course === 'Sports' ? 'selected' : '' %>>Sports</option>
+                <option value="Computer" <%=  data[0].course === 'Computer' ? 'selected' : '' %>>Computer</option>
             </select>
 
-            <button type="submit">Create</button>
+            <button type="submit">Save changes</button>
         </form>
     </div>
 
 
+    
 </body>
 </html>
