@@ -37,36 +37,88 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.teacherController = void 0;
+var dbconfig_1 = require("../model/dbconfig");
 var teacherController = /** @class */ (function () {
     function teacherController() {
     }
     teacherController.prototype.verifyTeacherLogin = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var name_1, password, data;
+            var teacherEmail, teacherPassword, teacherSignupData;
             return __generator(this, function (_a) {
                 try {
-                    name_1 = "teacher@123";
-                    password = "abc";
-                    data = {
+                    teacherEmail = "teacher@123";
+                    teacherPassword = "abc";
+                    teacherSignupData = {
                         email: req.body.email,
-                        password: req.body.passError
+                        password: req.body.password
                     };
-                    if (name_1 === req.body.email) {
-                        if (password === req.body.password) {
-                            res.render("dash");
+                    if (teacherEmail === teacherSignupData.email) {
+                        if (teacherPassword === teacherSignupData.password) {
+                            res.redirect("/dashboard");
                         }
                         else {
-                            res.render('main', { passError: "invalid password", data: data });
+                            res.render('login', { passError: "invalid password", data: teacherSignupData });
                         }
                     }
                     else {
-                        res.render("main", { emailError: "invalid email", data: data });
+                        res.render("login", { emailError: "invalid email", data: teacherSignupData });
                     }
                 }
                 catch (error) {
                     res.status(500).json({ message: 'Error' });
                 }
                 return [2 /*return*/];
+            });
+        });
+    };
+    teacherController.prototype.goToCreateNew = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                try {
+                    res.render('create');
+                }
+                catch (error) {
+                    res.status(500).json({ message: 'Error' });
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    teacherController.prototype.createNewStd = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var studentsData, emailCheck, querys, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 5, , 6]);
+                        studentsData = {
+                            name: req.body.name,
+                            email: req.body.email,
+                            password: req.body.password,
+                            rollno: req.body.rollno,
+                            course: req.body.course
+                        };
+                        return [4 /*yield*/, dbconfig_1.default.query("SELECT * FROM students WHERE email = $1", [studentsData.email])];
+                    case 1:
+                        emailCheck = _a.sent();
+                        if (!(emailCheck.rows.length > 0)) return [3 /*break*/, 2];
+                        res.render('create', { message: "Email already exists", data: studentsData });
+                        return [3 /*break*/, 4];
+                    case 2:
+                        querys = "INSERT INTO students (name, email, password, rollno, course) VALUES ($1, $2, $3, $4, $5)";
+                        return [4 /*yield*/, dbconfig_1.default.query(querys, [studentsData.name, studentsData.email, studentsData.password, studentsData.rollno, studentsData.course])];
+                    case 3:
+                        _a.sent();
+                        res.redirect('/dashboard');
+                        _a.label = 4;
+                    case 4: return [3 /*break*/, 6];
+                    case 5:
+                        error_1 = _a.sent();
+                        console.error("this is the DB er", error_1);
+                        res.status(500).json({ message: 'Error' });
+                        return [3 /*break*/, 6];
+                    case 6: return [2 /*return*/];
+                }
             });
         });
     };

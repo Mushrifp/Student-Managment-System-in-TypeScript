@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New student</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Söhne, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(135deg, #000000, #001f3f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; 
+        }
+
+        label {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        input, select {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        button[type="submit"] {
+            padding: 10px;
+            background-color: rgba(40, 167, 69, 0.9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: rgba(30, 128, 53, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            button[type="submit"] {
+                padding: 8px;
+            }
+        }
+        select {
+           padding: 10px;
+           border: none;
+           border-radius: 8px;
+           background-color: rgba(255, 255, 255, 0.2);
+           color: rgba(255, 255, 255, 0.9); 
+           font-size: 16px;
+           cursor: pointer;
+       }
+       
+       option {
+           background-color: rgba(10, 10, 30, 0.9);
+           color: rgba(255, 255, 255, 0.9); 
+       }
+       
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Create a new Student</h1>
+
+        <% if (typeof message !== 'undefined') { %>
+            <span style="color: rgb(255, 0, 0); font-size: x-large; margin-left: 40%;" >Email already exist</span>
+        <% } %>
+        
+        <form id="createForm" method="post" action="/createNewStd">
+            <label for="name">Name</label>
+            <input name="name" type="text" id="name" placeholder="Enter Name" value="<%= typeof data !== 'undefined' ? data.name : '' %>" required>
+
+            <label for="email">Email</label>
+            <input name="email" type="email" id="email" placeholder="Enter Email" value="<%= typeof data !== 'undefined' ? data.email : '' %>" required>
+
+            <label for="password">Password</label>
+            <input name="password" type="Password" id="Password" placeholder="Enter Password" value="<%= typeof data !== 'undefined' ? data.password : '' %>" required>
+
+            <label for="rollNo">Roll No</label>
+            <input name="rollno" type="number" id="rollNo" placeholder="Enter Roll No" value="<%= typeof data !== 'undefined' ? data.rollno : '' %>" required>
+
+            <label for="course">Course</label>
+            <select name="course" id="course" required>
+                <option value="" disabled>Select Course</option>
+                <option value="Language" <%= typeof data !== 'undefined' && data.course === 'Language' ? 'selected' : '' %>>Language</option>
+                <option value="Arts" <%= typeof data !== 'undefined' && data.course === 'Arts' ? 'selected' : '' %>>Arts</option>
+                <option value="Sports" <%= typeof data !== 'undefined' && data.course === 'Sports' ? 'selected' : '' %>>Sports</option>
+                <option value="Computer" <%= typeof data !== 'undefined' && data.course === 'Computer' ? 'selected' : '' %>>Computer</option>
+            </select>
+
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+
+</body>
+</html>

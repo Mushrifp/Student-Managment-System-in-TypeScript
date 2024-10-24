@@ -3,9 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Teacher/Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Söhne, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(135deg, #000000, #001f3f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(10, 10, 30, 0.8); 
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        th, td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        th {
+            background-color: rgba(20, 20, 50, 0.8); 
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.1); 
+        }
+
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background-color: rgba(0, 123, 255, 0.9); 
+        }
+
+        .view-btn:hover {
+            background-color: rgba(0, 85, 170, 0.9); 
+        }
+
+        .delete-btn {
+            background-color: rgba(220, 53, 69, 0.9); 
+        }
+
+        .delete-btn:hover {
+            background-color: rgba(175, 33, 44, 0.9); 
+        }
+
+        @media (max-width: 768px) {
+            th, td {
+                padding: 12px;
+            }
+
+            button {
+                padding: 6px 12px;
+            }
+        }
+        .create-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(40, 167, 69, 0.9); 
+            transition: all 0.3s ease;
+        }
+        
+        .create-btn:hover {
+            background-color: rgba(30, 128, 53, 0.9); 
+        }
+    </style>
 </head>
 <body>
-    welcome to the dashboard
+    
+    <div class="container">
+        <h1>Welcome to the Dashboard</h1>
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+            <button class="create-btn"><a href="/createNew" style="color: white; text-decoration: none;">Create New</a></button>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>101</td>
+                    <td>John Doe</td>
+                    <td>johndoe@example.com</td>
+                    <td>Grade 10</td>
+                    <td>
+                        <button class="view-btn" onclick="viewDetails(101)">View</button>
+                        <button class="delete-btn" onclick="deleteDetails(101)">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>Jane Smith</td>
+                    <td>janesmith@example.com</td>
+                    <td>Grade 11</td>
+                    <td>
+                        <button class="view-btn" onclick="viewDetails(102)">View</button>
+                        <button class="delete-btn" onclick="deleteDetails(102)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+    </script>
+
 </body>
 </html>
