@@ -171,6 +171,30 @@ var teacherController = /** @class */ (function () {
             });
         });
     };
+    teacherController.prototype.deleteStd = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var stdID, query, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        stdID = Number(req.query.id);
+                        query = "DELETE FROM students WHERE id = '".concat(stdID, "'");
+                        return [4 /*yield*/, dbconfig_1.default.query(query)];
+                    case 1:
+                        _a.sent();
+                        res.redirect("/dashboard");
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_4 = _a.sent();
+                        console.error("this is the DB er", error_4);
+                        res.status(500).json({ message: 'Error' });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return teacherController;
 }());
 exports.teacherController = teacherController;
@@ -193,7 +217,7 @@ var goToPages = /** @class */ (function () {
     };
     goToPages.prototype.loadDash = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var dataOfStudents, error_4;
+            var dataOfStudents, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -204,7 +228,7 @@ var goToPages = /** @class */ (function () {
                         res.render('dash', { students: dataOfStudents.rows });
                         return [3 /*break*/, 3];
                     case 2:
-                        error_4 = _a.sent();
+                        error_5 = _a.sent();
                         res.status(500).json({ message: 'Error' });
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];

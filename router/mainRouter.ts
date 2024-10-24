@@ -19,6 +19,7 @@ router.get('/createNew',(req:Request,res:Response)=> loadPages.goToCreateNew(req
 router.post('/createNewStd',(req:Request,res:Response)=> teacherFunctions.createNewStd(req,res))
 router.get('/editStd',(req:Request,res:Response)=> teacherFunctions.editStudents(req,res))
 router.post('/saveChanges',(req:Request,res:Response)=> teacherFunctions.saveChanges(req,res))
+router.get('/deleteStd',(req:Request,res:Response)=> teacherFunctions.deleteStd(req,res))
 
 
 export default router

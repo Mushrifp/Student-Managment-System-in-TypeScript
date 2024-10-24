@@ -17,4 +17,5 @@ router.get('/createNew', function (req, res) { return loadPages.goToCreateNew(re
 router.post('/createNewStd', function (req, res) { return teacherFunctions.createNewStd(req, res); });
 router.get('/editStd', function (req, res) { return teacherFunctions.editStudents(req, res); });
 router.post('/saveChanges', function (req, res) { return teacherFunctions.saveChanges(req, res); });
+router.get('/deleteStd', function (req, res) { return teacherFunctions.deleteStd(req, res); });
 exports.default = router;

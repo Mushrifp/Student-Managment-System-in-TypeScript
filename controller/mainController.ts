@@ -114,6 +114,22 @@ export class teacherController{
       }
    }
 
+   public async deleteStd(req:Request , res:Response):Promise<void>{
+      try{
+
+          const stdID:number = Number(req.query.id)
+
+          let query:string = `DELETE FROM students WHERE id = '${stdID}'`;
+           await dataBase.query(query)
+
+          res.redirect("/dashboard")
+          
+      }catch (error) {
+         console.error("this is the DB er", error)
+        res.status(500).json({ message: 'Error'});
+      }
+   } 
+
 }
 
 //----------------------------------------------------
