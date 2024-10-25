@@ -8,12 +8,14 @@ var client = new pg_1.Client({
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
-    port: Number(process.env.DB_PORT)
+    port: Number(process.env.DB_PORT),
 });
-client.connect()
+client
+    .connect()
     .then(function () {
     console.log("DB connected ");
-}).catch(function (error) {
+})
+    .catch(function (error) {
     console.log("error occured", error);
 });
 exports.default = client;
