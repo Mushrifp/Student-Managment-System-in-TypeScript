@@ -166,8 +166,7 @@ var teacherController = /** @class */ (function () {
                         return [4 /*yield*/, dbconfig_1.default.query("SELECT * FROM students WHERE email = $1", [studentsData.email])];
                     case 1:
                         emailCheck = _a.sent();
-                        if (!(emailCheck.rows.length > 0 &&
-                            emailCheck.rows[0].email !== studentsData.email)) return [3 /*break*/, 2];
+                        if (!(emailCheck.rows.length > 0 && emailCheck.rows[0].email === studentsData.email)) return [3 /*break*/, 2];
                         res.render("editStd", {
                             message: "Email already exists",
                             data: [studentsData],

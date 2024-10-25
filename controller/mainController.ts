@@ -112,10 +112,7 @@ export class teacherController {
         [studentsData.email]
       );
 
-      if (
-        emailCheck.rows.length > 0 &&
-        emailCheck.rows[0].email !== studentsData.email
-      ) {
+      if ( emailCheck.rows.length > 0 && emailCheck.rows[0].email === studentsData.email) {
         res.render("editStd", {
           message: "Email already exists",
           data: [studentsData],
