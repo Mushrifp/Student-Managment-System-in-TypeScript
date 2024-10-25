@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import dataBase from '../model/dbconfig'
 
 interface interfaceData {
+   id:number;
    name: string;
    email: string;
    password: string;
@@ -88,11 +89,12 @@ export class teacherController{
       try{
 
          const studentsData:Data = {
+            id:req.body.id,
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
             rollno: req.body.rollno,
-            course: req.body.course
+            course: req.body.course,   
           }
 
          let emailCheck = await dataBase.query(`SELECT * FROM students WHERE email = $1`, [studentsData.email]);
@@ -151,4 +153,37 @@ export class goToPages{
         res.status(500).json({ message: 'Error'});
       }
    }
+} 
+
+//------------------------------------------------
+
+export class studentController{
+   public async verifyStudent(req:Request , res:Response):Promise<void>{
+      try{
+
+           console.log("this is the data ",req.body)   
+        
+        const studentSignupData:Data={
+          email:req.body.email,
+          password:req.body.password
+        }
+
+        let dataFromDB = await dataBase.query('SELECT * FROM students WHERE email = $1',[studentSignupData.email])
+
+         if(dataFromDB.rows.length != 0 &&  dataFromDB.rows[0].email === studentSignupData.email ){
+            if(dataFromDB.rows[0].password === studentSignupData.password){
+               res.render("stdView",{data:dataFromDB.rows})
+            }else{
+                res.render('login',{stdPassError:"invalid password",stdData:studentSignupData})
+            }
+         }else{
+            res.render("login",{stdEmailError:"invalid email",stdData:studentSignupData})
+         }
+
+      }catch (error) {
+         console.log("error fr ",error)
+        res.status(500).json({ message: 'Error'});
+      }
+   }
+
 } 

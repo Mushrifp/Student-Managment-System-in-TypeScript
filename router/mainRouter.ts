@@ -5,6 +5,7 @@ import * as mainController from '../controller/mainController'
 const router:Router = Router()
 const teacherFunctions = new mainController.teacherController()
 const loadPages = new mainController.goToPages()
+const studentFunctions = new mainController.studentController()
 
 router.get("/",(req:Request , res:Response)=>{
     res.render("login")
@@ -14,12 +15,15 @@ router.get("/logIn",(req:Request , res:Response)=>{
 }) 
 
 router.post('/dashboard',(req:Request,res:Response)=> teacherFunctions.verifyTeacherLogin(req,res))
-router.get('/dashboard',(req:Request,res:Response)=> loadPages.loadDash(req,res))
-router.get('/createNew',(req:Request,res:Response)=> loadPages.goToCreateNew(req,res))
 router.post('/createNewStd',(req:Request,res:Response)=> teacherFunctions.createNewStd(req,res))
 router.get('/editStd',(req:Request,res:Response)=> teacherFunctions.editStudents(req,res))
 router.post('/saveChanges',(req:Request,res:Response)=> teacherFunctions.saveChanges(req,res))
 router.get('/deleteStd',(req:Request,res:Response)=> teacherFunctions.deleteStd(req,res))
 
+router.get('/dashboard',(req:Request,res:Response)=> loadPages.loadDash(req,res))
+router.get('/createNew',(req:Request,res:Response)=> loadPages.goToCreateNew(req,res))
 
-export default router
+router.post('/stdVerification',(req:Request,res:Response)=> studentFunctions.verifyStudent(req,res))
+
+
+export default router 

@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.goToPages = exports.teacherController = void 0;
+exports.studentController = exports.goToPages = exports.teacherController = void 0;
 var dbconfig_1 = require("../model/dbconfig");
 var teacherController = /** @class */ (function () {
     function teacherController() {
@@ -141,11 +141,12 @@ var teacherController = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 5, , 6]);
                         studentsData = {
+                            id: req.body.id,
                             name: req.body.name,
                             email: req.body.email,
                             password: req.body.password,
                             rollno: req.body.rollno,
-                            course: req.body.course
+                            course: req.body.course,
                         };
                         return [4 /*yield*/, dbconfig_1.default.query("SELECT * FROM students WHERE email = $1", [studentsData.email])];
                     case 1:
@@ -239,3 +240,47 @@ var goToPages = /** @class */ (function () {
     return goToPages;
 }());
 exports.goToPages = goToPages;
+//------------------------------------------------
+var studentController = /** @class */ (function () {
+    function studentController() {
+    }
+    studentController.prototype.verifyStudent = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var studentSignupData, dataFromDB, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log("this is the data ", req.body);
+                        studentSignupData = {
+                            email: req.body.email,
+                            password: req.body.password
+                        };
+                        return [4 /*yield*/, dbconfig_1.default.query('SELECT * FROM students WHERE email = $1', [studentSignupData.email])];
+                    case 1:
+                        dataFromDB = _a.sent();
+                        if (dataFromDB.rows.length != 0 && dataFromDB.rows[0].email === studentSignupData.email) {
+                            if (dataFromDB.rows[0].password === studentSignupData.password) {
+                                res.render("stdView", { data: dataFromDB.rows });
+                            }
+                            else {
+                                res.render('login', { stdPassError: "invalid password", stdData: studentSignupData });
+                            }
+                        }
+                        else {
+                            res.render("login", { stdEmailError: "invalid email", stdData: studentSignupData });
+                        }
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_6 = _a.sent();
+                        console.log("error fr ", error_6);
+                        res.status(500).json({ message: 'Error' });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return studentController;
+}());
+exports.studentController = studentController;

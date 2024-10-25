@@ -15,7 +15,7 @@
             font-family: Söhne, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
             min-height: 100vh;
             padding: 20px;
-            background: linear-gradient(135deg, #000000, #001f3f);
+            background: linear-gradient(135deg, #19193d, #040409);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,7 +24,7 @@
         .container {
             width: 100%;
             max-width: 1200px;
-            background: rgba(0, 0, 0, 0.85);
+            background: linear-gradient(135deg, #19193d, #040409);
             backdrop-filter: blur(12px);
             border-radius: 20px;
             padding: 20px;
@@ -120,7 +120,7 @@
             <label for="rollNo">Roll No</label>
             <input name="rollno" type="number" id="rollNo" placeholder="Enter Roll No" value="<%= data[0].rollno  %>" required>
 
-            <input type="hidden" name="id" value="<%= data[0].id%>">
+            <input type="hidden" name="id" value="<%= data[0].id %>">
 
             <label for="course">Course</label>
             <select name="course" id="course" required>

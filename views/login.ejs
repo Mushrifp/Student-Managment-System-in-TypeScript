@@ -10,244 +10,152 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: Söhne, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(135deg, #19193d, #040409);
             padding: 20px;
-            background: black;
-            position: relative;
-            overflow: hidden;
         }
-
-        .glass-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: radial-gradient(
-                circle at center,
-                rgba(0, 17, 255, 0.1) 100%,
-                rgba(34, 255, 0, 0.05) 100%,
-                rgba(0, 162, 255, 0) 100%
-            );
-            pointer-events: none;
-        }
-
         .container {
             width: 100%;
-            max-width: 1000px;
-            min-height: 600px;
-            display: flex;
-            background: rgba(0, 0, 0, 0.684);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 20px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 50%,
-                rgba(0, 0, 0, 0.1) 50%,
-                transparent 100%
-            );
-            transform: rotate(45deg);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .form-container {
-            flex: 1;
-            padding: 48px;
+            max-width: 900px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: linear-gradient(135deg, #19193d, #040409);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
-
-        .welcome-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-type {
-            color: white;
-            font-size: 32px;
+        h1 {
+            font-size: 28px;
             font-weight: 600;
-            margin-bottom: 32px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-            position: relative;
-        }
-
-        .input-label {
-            display: block;
+            text-align: center;
+            margin-bottom: 10px;
             color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
-
+        .form-section {
+            flex: 1;
+            padding: 40px;
+            text-align: center;
+        }
+        .welcome-text {
+            font-size: 16px;
+            color: #b3b3b3;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .input-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 8px;
+        }
         input[type="email"],
         input[type="password"] {
             width: 100%;
-            padding: 12px 16px;
+            padding: 14px;
             font-size: 16px;
+            color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+            transition: all 0.3s;
         }
-
         input[type="email"]::placeholder,
         input[type="password"]::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
         }
-
         input[type="email"]:focus,
         input[type="password"]:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 
-                0 0 0 4px rgba(255, 255, 255, 0.1),
-                inset 0 0 10px rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
         }
-
+        .error-message {
+            font-size: 15px;
+            color: rgba(255, 85, 85, 0.9);
+            margin-top: 6px;
+        }
         button {
             width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            background: rgba(0, 160, 51, 0.9);
+            padding: 14px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #21d4fd, #2152ff);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
         }
-
         button:hover {
-            background: rgb(0, 97, 19);
+            background: linear-gradient(135deg, #1a9cf8, #1e3dbb);
         }
-
         .divider {
-            width: 1px;
-            margin: 48px 0;
-            position: relative;
+            height: 2px;
+            width: 80%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1);
         }
-
-        .error-message {
-            display: block;
-            margin-top: 8px;
-            color: red; 
-            font-size: 18px; 
-        }
-
-
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .container {
-                flex-direction: column;
-                min-height: auto;
+                flex-direction: row;
+                justify-content: space-between;
             }
-
-            .form-container {
-                padding: 32px;
+            .form-section {
+                padding: 40px 20px;
+                width: 50%;
             }
-
             .divider {
-                width: 100%;
-                height: 1px;
-                margin: 0;
-                background: linear-gradient(
-                    to right,
-                    rgba(255, 255, 255, 0) ,
-                    rgb(0, 0, 0) ,
-                    rgba(255, 255, 255, 0) 
-                );
-            }
-
-            .login-type {
-                font-size: 28px;
-                margin-bottom: 24px;
+                width: 2px;
+                height: auto;
             }
         }
     </style>
 </head>
 <body>
-    <div class="glass-bg"></div>
     <div class="container">
-        <div class="form-container">
+        <div class="form-section">
             <p class="welcome-text">Welcome back</p>
-            <h1 class="login-type">Student Login</h1>
-            <form>
+            <h1>Student Login</h1>
+            <form action="/stdVerification" method="post">
                 <div class="form-group">
                     <label class="input-label" for="student-email">Email address</label>
-                    <input type="email" id="student-email" placeholder="Enter your email" required>
+                    <input type="email" id="student-email" name="email" placeholder="Enter your email" value="<%= typeof stdData !== 'undefined' ? stdData.email : '' %>" required>
                 </div>
                 <div class="form-group">
                     <label class="input-label" for="student-password">Password</label>
-                    <input type="password" id="student-password" placeholder="Enter your password" required>
-                    <span class="error-message" id="student-error"> <!-- Error message space -->
-                        <!-- Error message from server can be dynamically inserted here -->
+                    <input type="password" id="student-password" name="password" placeholder="Enter your password" value="<%= typeof stdData !== 'undefined' ? stdData.password : '' %>" required>
+                    <span class="error-message" id="student-error">
+                        <% if (typeof stdEmailError !== 'undefined') { %>invalid email<% } else if (typeof stdPassError !== 'undefined') { %>invalid password<% } %>
                     </span>
                 </div>
                 <button type="submit">Sign in</button>
             </form>
         </div>
-
+        
         <div class="divider"></div>
-
-        <div class="form-container">
+        
+        <div class="form-section">
             <p class="welcome-text">Welcome back</p>
-            <h1 class="login-type">Teacher Login</h1>
+            <h1>Teacher Login</h1>
             <form action="/dashboard" method="post">
                 <div class="form-group">
                     <label class="input-label" for="teacher-email">Email address</label>
-                    <input type="email" id="teacher-email" name="email" 
-                           placeholder="enter you email"  value="<%= typeof data !== 'undefined' ? data.email : '' %>" required >
+                    <input type="email" id="teacher-email" name="email" placeholder="Enter your email" value="<%= typeof data !== 'undefined' ? data.email : '' %>" required>
                 </div>
                 <div class="form-group">
                     <label class="input-label" for="teacher-password">Password</label>
-                    <input type="password" id="teacher-password" name="password" 
-                           placeholder="enter your password" value="<%= typeof data !== 'undefined' ? data.password : '' %>" required>
+                    <input type="password" id="teacher-password" name="password" placeholder="Enter your password" value="<%= typeof data !== 'undefined' ? data.password : '' %>" required>
                     <span class="error-message">
-                        <% if (typeof emailError !== 'undefined') { %>
-                            invalid email
-                        <% } else if (typeof passError !== 'undefined') { %>
-                            invalid password
-                        <% } %>
+                        <% if (typeof emailError !== 'undefined') { %>invalid email<% } else if (typeof passError !== 'undefined') { %>invalid password<% } %>
                     </span>
                 </div>
                 <button type="submit">Sign in</button>
@@ -255,5 +163,4 @@
         </div>
     </div>
 </body>
-
 </html>
